@@ -68,19 +68,17 @@ RUN \
 
 RUN \
     echo "*** Install Lidarr ***" && \
-    wget https://github.com/lidarr/Lidarr/releases/download/v0.7.1.1381/Lidarr.master.0.7.1.1381.linux.tar.gz -O lidarr.tgz && \
+    cd /tmp && wget https://github.com/lidarr/Lidarr/releases/download/v0.7.1.1381/Lidarr.master.0.7.1.1381.linux.tar.gz -O lidarr.tgz && \
     tar xzvf lidarr.tgz && \
     mv Lidarr /app && \
     cp /app/installer-common/lidarr.service /etc/systemd/system/ && \
     adduser --disabled-password --home /app/Lidarr -q --gecos "" lidarr && \
-    chown -R lidarr:lidarr /app/Lidarr && \
-    systemctl enable lidarr.service
+    chown -R lidarr:lidarr /app/Lidarr    
 
 RUN \
     echo "*** Install Sonarr ***" && \
-    apt-get install sonarr sqlite3 libmediainfo-dev -y && \
-    systemctl enable sonarr
-
+    apt-get install sonarr sqlite3 libmediainfo-dev -y
+    
 # RUN \
 #    echo "*** Install Bazarr ***" && \
 #    cd /app && git clone https://github.com/morpheus65535/bazarr.git && \
@@ -88,8 +86,7 @@ RUN \
 
 RUN \
     echo "*** Install SABNZBDPLUS ***" && \
-    apt-get install -y sabnzbdplus && \
-    systemctl enable sabnzbdplus
+    apt-get install -y sabnzbdplus
 
 RUN \
     echo "*** Time to run a final clean up ***" && \
@@ -99,7 +96,6 @@ RUN \
         /var/lib/apt/lists/* \
         /tmp/* \
         /var/tmp/* 
-
 
 # PORTs web = 31337 / scgi = 31338 / rtorrent = 31339 / ssl = 31340 / dht = 31341 / jackett = 9117 / sonarr = 8989 / sab = 8080 9090
 
