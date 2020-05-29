@@ -45,7 +45,7 @@ RUN \
 RUN \
     echo "*** Software installed, configuring applications and setting up directories ***" && \
     cd / && \
-    cp /app/installer-common/config.php /app/installer-common/startup-rtorrent.sh /app/installer-common/startup-nginx.sh /app/installer-common/startup-php.sh /app/installer-common/startup-irssi.sh /app/installer-common/rtorrent.rc /app/startup/ && \
+    cp /app/installer-common/config.php /app/installer-common/startup-rtorrent.sh /app/installer-common/startup-*.sh /app/installer-common/rtorrent.rc /app/startup/ && \
     cp /app/installer-common/supervisord.conf /etc/supervisor/conf.d/ && \
     chmod +x /app/startup/*.sh && \
     ln -s /config /app/configs && \
