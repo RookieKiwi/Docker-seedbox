@@ -22,4 +22,4 @@ else
     cp /app/startup/sonarr-config.xml /app/configs/sonarr/config.xml
 fi
 
-/usr/bin/mono /app/sonarr/Sonarr.exe -nobrowser -data=/app/seedbox/sonarr
+/usr/bin/mono /usr/lib/sonarr/bin/Sonarr.exe -nobrowser -data=/app/seedbox/sonarr

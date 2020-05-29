@@ -3,16 +3,16 @@
 sleep 5
 
 # Set up .autodl dir, and allow for configs to be saved.
-if [ ! -h /home/rtorrent/.autodl ]
+if [ ! -h /app/seedbox/.autodl ]
 then
 	echo "Linking autodl config directory to /app/configs/autodl."
 	if [ ! -d /app/configs/autodl ]
 	then
 		echo "Did not find /app/configs/autodl existed. Creating it."
 		mkdir /app/configs/autodl
-		chown rtorrent:rtorrent /app/configs/autodl
+		chown seedbox:seedbox /app/configs/autodl
 	fi
-	ln -s /app/configs/autodl /home/rtorrent/.autodl
+	ln -s /app/configs/autodl /app/seedbox/.autodl
 else
 	echo "Do not need to relink the autodl config directory."
 fi
@@ -35,22 +35,22 @@ else
 gui-server-port = ${irssi_port}
 gui-server-password = ${irssi_pass}
 ADC
-	chown -R rtorrent:rtorrent /app/configs/autodl
+	chown -R seedbox:seedbox /app/configs/autodl
 fi
 
 
 
 # Set up .irssi scripts.
-if [ ! -d /home/rtorrent/.irssi ]
+if [ ! -d /app/seedbox/.irssi ]
 then
 	echo "Creating necessary directory structure for irssi and downloading files ... "
-	mkdir -p /home/rtorrent/.irssi/scripts/autorun && cd /home/rtorrent/.irssi/scripts || (echo "mkdir failed ... " && exit 1)
+	mkdir -p /app/seedbox/.irssi/scripts/autorun && cd /app/seedbox/.irssi/scripts || (echo "mkdir failed ... " && exit 1)
 	curl -sL http://git.io/vlcND | grep -Po '(?<="browser_download_url": ")(.*-v[\d.]+.zip)' | xargs wget --quiet -O autodl-irssi.zip
 	unzip -o autodl-irssi.zip >/dev/null 2>&1
 	rm autodl-irssi.zip
 	cp autodl-irssi.pl autorun/
-	chown -R rtorrent:rtorrent /home/rtorrent/.irssi
-	sed -i -e 's/1.86/1.84/g' /home/rtorrent/.irssi/scripts/AutodlIrssi/SslSocket.pm
+	chown -R rtorrent:rtorrent /app/seedbox/.irssi
+	sed -i -e 's/1.86/1.84/g' /app/seedbox/.irssi/scripts/AutodlIrssi/SslSocket.pm
 else
 	echo "Found irssi scripts are installed. Skipping install."
 fi
@@ -73,5 +73,5 @@ else
 fi
 
 echo "Starting up irssi."
-su --login --command="TERM=xterm irssi" rtorrent
+su --login --command="TERM=xterm irssi" seedbox
 
