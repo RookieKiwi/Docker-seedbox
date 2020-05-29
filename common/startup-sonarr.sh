@@ -20,6 +20,7 @@ then
 else
 	echo "Need to set up a new sonarr install."
     cp /app/startup/sonarr-config.xml /app/configs/sonarr/config.xml
+	chown -R seedbox:seedbox /app/configs/sonarr/config.xml
 fi
 
 su --login --command="TERM=xterm /usr/bin/mono /usr/lib/sonarr/bin/Sonarr.exe -nobrowser -data=/app/seedbox/sonarr" seedbox

@@ -8,6 +8,7 @@ then
 		echo "Did not find /app/configs/lidarr existed. Creating it."
 		mkdir -p /app/configs/lidarr
 		chown -R seedbox:seedbox /app/configs/lidarr
+		chown -R seedbox:seedbox /app/lidarr
 		ln -s /app/configs/lidarr /app/seedbox/lidarr
 	fi
 else
@@ -20,6 +21,7 @@ then
 else
 	echo "Need to set up a new lidarr install."
     cp /app/startup/lidarr-config.xml /app/configs/lidarr/config.xml
+	chown -R seedbox:seedbox /app/configs/lidarr/config.xml
 fi
 
 su --login --command="TERM=xterm /usr/bin/mono /app/lidarr/Lidarr.exe -nobrowser -data=/app/seedbox/lidarr" seedbox

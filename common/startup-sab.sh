@@ -20,6 +20,7 @@ then
 else
 	echo "Need to set up a new sab install."
     cp /app/startup/sabnzbd.ini /app/configs/sab/sabnzbd.ini
+	chown -R seedbox:seedbox /app/configs/sab/sabnzbd.ini
 fi
 
 su --login --command="TERM=xterm /usr/bin/sabnzbdplus -f /app/seedbox -s 0.0.0.0:31338" seedbox

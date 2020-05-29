@@ -8,6 +8,7 @@ then
 		echo "Did not find /app/configs/radarr existed. Creating it."
 		mkdir -p /app/configs/radarr
 		chown -R seedbox:seedbox /app/configs/radarr
+		chown -R seedbox:seedbox /app/radarr
 		ln -s /app/configs/radarr /app/seedbox/radarr
 	fi
 else
@@ -20,6 +21,7 @@ then
 else
 	echo "Need to set up a new radarr install."
     cp /app/startup/radarr-config.xml /app/configs/radarr/config.xml
+	chown -R seedbox:seedbox /app/configs/radarr/config.xml
 fi
 
 su --login --command="TERM=xterm /usr/bin/mono /app/radarr/Radarr.exe -nobrowser -data=/app/seedbox/radarr" seedbox
