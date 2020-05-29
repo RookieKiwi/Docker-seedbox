@@ -22,8 +22,5 @@ Jacket is installed on port 31342, Jackett works as a proxy server: it translate
 
 ## Configuration of Ports and Directories
 
-Container location: /app/downloads
-Where files will be downloaded to
-
-Container location: /app/configs
-Where configuration files will be generated to
+Container location: /app/downloads - where files will be downloaded to
+Container location: /app/configs - where configuration files will be generated to

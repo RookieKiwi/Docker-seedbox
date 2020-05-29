@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [ ! -h /app/seedbox/lidarr ]
+if [ ! -d /app/seedbox/lidarr ]
 then
 	echo "Linking lidarr config directory to /app/configs/lidarr."
 	if [ ! -d /app/configs/lidarr ]
@@ -8,8 +8,8 @@ then
 		echo "Did not find /app/configs/lidarr existed. Creating it."
 		mkdir -p /app/configs/lidarr
 		chown seedbox:seedbox /app/configs/lidarr
+		ln -s /app/configs/lidarr /app/seedbox/lidarr
 	fi
-	ln -s /app/configs/lidarr /app/seedbox/lidarr
 else
 	echo "Do not need to relink the lidarr config directory."
 fi

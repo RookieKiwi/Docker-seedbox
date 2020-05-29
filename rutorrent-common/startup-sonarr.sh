@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [ ! -h /app/seedbox/sonarr ]
+if [ ! -d /app/seedbox/sonarr ]
 then
 	echo "Linking sonarr config directory to /app/configs/sonarr."
 	if [ ! -d /app/configs/sonarr ]
@@ -8,8 +8,8 @@ then
 		echo "Did not find /app/configs/sonarr existed. Creating it."
 		mkdir -p /app/configs/sonarr
 		chown seedbox:seedbox /app/configs/sonarr
+		ln -s /app/configs/sonarr /app/seedbox/sonarr
 	fi
-	ln -s /app/configs/sonarr /app/seedbox/sonarr
 else
 	echo "Do not need to relink the sonarr config directory."
 fi

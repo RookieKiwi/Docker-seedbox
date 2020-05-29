@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [ ! -h /app/seedbox/radarr ]
+if [ ! -d /app/seedbox/radarr ]
 then
 	echo "Linking radarr config directory to /app/configs/radarr."
 	if [ ! -d /app/configs/radarr ]
@@ -8,8 +8,8 @@ then
 		echo "Did not find /app/configs/radarr existed. Creating it."
 		mkdir -p /app/configs/radarr
 		chown seedbox:seedbox /app/configs/radarr
+		ln -s /app/configs/radarr /app/seedbox/radarr
 	fi
-	ln -s /app/configs/radarr /app/seedbox/radarr
 else
 	echo "Do not need to relink the radarr config directory."
 fi

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [ ! -h /app/seedbox/sab ]
+if [ ! -d /app/seedbox/sab ]
 then
 	echo "Linking sab config directory to /app/configs/sab."
 	if [ ! -d /app/configs/sab ]
@@ -8,8 +8,8 @@ then
 		echo "Did not find /app/configs/sab existed. Creating it."
 		mkdir -p /app/configs/sab
 		chown seedbox:seedbox /app/configs/sab
+		ln -s /app/configs/sab /app/seedbox/sab
 	fi
-	ln -s /app/configs/sab /app/seedbox/sab
 else
 	echo "Do not need to relink the sab config directory."
 fi
