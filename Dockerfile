@@ -29,8 +29,10 @@ RUN \
     pip3 install cloudscraper
 
 RUN \
-    echo "*** Installing PHP and Web Services ***" && \
-    apt-get install -y curl php-fpm php-cli php-geoip php-mbstring php-zip nginx ffmpeg php-xml
+    echo "*** Installing PHP, Web Services and creating seedbox user ***" && \
+    apt-get install -y curl php-fpm php-cli php-geoip php-mbstring php-zip nginx ffmpeg php-xml && \
+    mkdir -p /app/seedbox && adduser --disabled-password --home /app/seedbox -q --gecos "" seedbox && \
+    chown -R seedbox:seedbox /app/seedbox
 
 RUN \
     echo "*** Installing remaining components for ruTorrent and plugins ***" && \
@@ -60,24 +62,17 @@ RUN \
     cd /tmp && apt-get install mono-devel -y && \
     wget https://github.com/Radarr/Radarr/releases/download/v0.2.0.1480/Radarr.develop.0.2.0.1480.linux.tar.gz -O radarr.tgz && \
     tar -xvzf radarr.tgz && \
-    mv Radarr /app && \
-    cp /app/installer-common/radarr.service /etc/systemd/system/ && \
-    adduser --disabled-password --home /app/Radarr -q --gecos "" radarr && \
-    chown -R radarr:radarr /app/Radarr && \
-    systemctl enable radarr.service
+    mv Radarr /app
 
 RUN \
     echo "*** Install Lidarr ***" && \
     cd /tmp && wget https://github.com/lidarr/Lidarr/releases/download/v0.7.1.1381/Lidarr.master.0.7.1.1381.linux.tar.gz -O lidarr.tgz && \
     tar xzvf lidarr.tgz && \
-    mv Lidarr /app && \
-    cp /app/installer-common/lidarr.service /etc/systemd/system/ && \
-    adduser --disabled-password --home /app/Lidarr -q --gecos "" lidarr && \
-    chown -R lidarr:lidarr /app/Lidarr    
+    mv Lidarr /app/lidarr
 
 RUN \
     echo "*** Install Sonarr ***" && \
-    apt-get install sonarr sqlite3 libmediainfo-dev -y
+    apt-get install sonarr sqlite3 libmediainfo-dev -y && mkdir /app/Sonarr
     
 # RUN \
 #    echo "*** Install Bazarr ***" && \
@@ -86,6 +81,7 @@ RUN \
 
 RUN \
     echo "*** Install SABNZBDPLUS ***" && \
+    pip install sabyenc --upgrade && \
     apt-get install -y sabnzbdplus
 
 RUN \
@@ -97,9 +93,9 @@ RUN \
         /tmp/* \
         /var/tmp/* 
 
-# PORTs web = 31337 / scgi = 31338 / rtorrent = 31339 / ssl = 31340 / dht = 31341 / jackett = 9117 / sonarr = 8989 / sab = 8080 9090
+# PORTs 31337/rutorrent 31338/sabnzbdplus 31339/sonarr 31340/radarr 31341/lidarr 31342/jackett 31343/rutorrentssl 31344/sci 31345/dht 31346/torrents
 
-EXPOSE 31337 31338 31339 31340 31341 9117 8989 8080 9090
+EXPOSE 31337 31338 31339 31340 31341 31342 31343 31344 31345 31346
 VOLUME /app/downloads /app/configs
 
 CMD ["supervisord"]

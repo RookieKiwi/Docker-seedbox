@@ -63,7 +63,7 @@ server {
 
 	location /RPC2 {
         	include scgi_params;
-	        scgi_pass 127.0.0.1:31338;
+	        scgi_pass 127.0.0.1:31344;
                 scgi_param SCRIPT_NAME /RPC2;
 		auth_basic "Restricted";
 		auth_basic_user_file /app/rutorrent/.htpasswd;

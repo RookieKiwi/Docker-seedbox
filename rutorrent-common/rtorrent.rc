@@ -1,4 +1,4 @@
-scgi_port=127.0.0.1:31338
+scgi_port=0.0.0.0:31344
 encoding_list = UTF-8
 
 log.open_file = "rtorrent.log", "/app/configs/logs/rtorrent/rtorrent.log"
@@ -56,7 +56,7 @@ schedule2 = watch_directory,5,5,load_start=/app/downloads/watch/*.torrent
 #network.bind_address.set = rakshasa.no
 
 # Port range to use for listening.
-network.port_range.set = 31339-31339
+network.port_range.set = 31346-31346
 
 # Start opening ports at a random position within the port range.
 network.port_random.set = no
@@ -92,7 +92,7 @@ dht.mode.set = off
 
 # UDP port to use for DHT. 
 # 
-dht.port.set=31341
+dht.port.set=31345
 
 # Enable peer exchange (for torrents not marked private)
 #
