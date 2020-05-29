@@ -8,7 +8,7 @@ LABEL build_version="Docker-seedbox version ${VERSION} by RookieKiwi"
 LABEL maintainer="RookieKiwi"
 
 # copy common files for install
-COPY rutorrent-common/ /app/installer-common/
+COPY common/ /app/installer-common/
 
 RUN \
     echo "*** Running container updates, adding repos and doing basic installs ***" && \

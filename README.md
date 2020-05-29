@@ -22,5 +22,10 @@ Jacket is installed on port 31342, Jackett works as a proxy server: it translate
 
 ## Configuration of Ports and Directories
 
-Container location: /app/downloads - where files will be downloaded to
-Container location: /app/configs - where configuration files will be generated to
+###### Container location: /app/downloads
+Where files will be downloaded to
+
+###### Container location: /app/configs
+Where configuration files will be generated to
+
+###### Ports: 31337/ruTorrent (non-SSL) 31338/SABnzbdPlus 31339/Sonarr 31340/Radarr 31341/Lidarr 31342/Jackett 31343/ruTorrent (ssl) 31344/sci 31345/DHT 31346/Torrent Data
