@@ -62,7 +62,7 @@ RUN \
     cd /tmp && apt-get install mono-devel -y && \
     wget https://github.com/Radarr/Radarr/releases/download/v0.2.0.1480/Radarr.develop.0.2.0.1480.linux.tar.gz -O radarr.tgz && \
     tar -xvzf radarr.tgz && \
-    mv Radarr /app
+    mv Radarr /app/radarr
 
 RUN \
     echo "*** Install Lidarr ***" && \
@@ -72,7 +72,7 @@ RUN \
 
 RUN \
     echo "*** Install Sonarr ***" && \
-    apt-get install sonarr sqlite3 libmediainfo-dev -y && mkdir /app/Sonarr
+    apt-get install sonarr sqlite3 libmediainfo-dev -y
     
 # RUN \
 #    echo "*** Install Bazarr ***" && \

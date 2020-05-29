@@ -21,3 +21,9 @@ Lidarr is installed on port 31341, Lidarr is a music collection manager for Usen
 Jacket is installed on port 31342, Jackett works as a proxy server: it translates queries from apps (Sonarr, Radarr, SickRage, CouchPotato, Mylar, Lidarr, DuckieTV, qBittorrent, Nefarious etc.) into tracker-site-specific http queries, parses the html response, then sends results back to the requesting software. This allows for getting recent uploads (like RSS) and performing searches. Jackett is a single repository of maintained indexer scraping & translation logic - removing the burden from other apps.
 
 ## Configuration of Ports and Directories
+
+Container location: /app/downloads
+Where files will be downloaded to
+
+Container location: /app/configs
+Where configuration files will be generated to
