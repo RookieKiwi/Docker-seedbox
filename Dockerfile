@@ -53,7 +53,7 @@ RUN \
 
 RUN \
     echo "**** Install Jackett ****" && \
-    mkdir /app/jackett && cd /tmp && wget https://github.com/Jackett/Jackett/releases/download/v0.16.551/Jackett.Binaries.LinuxAMDx64.tar.gz -O /tmp/jackett.tgz && \
+    mkdir /app/jackett && cd /tmp && wget https://github.com/Jackett/Jackett/releases/download/v0.16.788/Jackett.Binaries.LinuxAMDx64.tar.gz -O /tmp/jackett.tgz && \
     tar xf /tmp/jackett.tgz -C /app/jackett --strip-components=1 && \
     chown -R root:root /app/jackett
 
