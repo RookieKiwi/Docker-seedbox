@@ -16,6 +16,7 @@ if [ ! -e /app/configs/rtorrent/rtorrent.rc ]; then
 fi
 
 rm -f /app/configs/rtorrent/session/rtorrent.lock
+ln -s /app/configs/rtorrent/rtorrent.rc /app/seedbox/.rtorrent.rc
 
 # run
 su --login --command="TERM=xterm rtorrent" seedbox 
