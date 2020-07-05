@@ -2,16 +2,25 @@
 
 if [ ! -d /app/seedbox/sab ]
 then
-	echo "Linking sab config directory to /app/configs/sab."
-	if [ ! -d /app/configs/sab ]
-	then
-		echo "Did not find /app/configs/sab existed. Creating it."
-		mkdir -p /app/configs/sab
-		chown seedbox:seedbox /app/configs/sab
-		ln -s /app/configs/sab /app/seedbox/sab
-	fi
+        echo "/app/seedbox/sab does not exist!, Checking for configs directory"
+        if [ ! -d /app/configs/sab ]
+        then
+                echo "/app/configs/sab does not exist. Creating it."
+                mkdir -p /app/configs/sab
+                ln -s /app/configs/sab /app/seedbox/sab
+                chown -R seedbox:seedbox /app/configs/sab
+                chown -R seedbox:seedbox /app/seedbox/sab
+				/app/startup/perm-fixes.sh
+        else
+                echo "/app/configs/sab exists, creating symlinks"
+                chown -R seedbox:seedbox /app/configs/sab
+                chown -R seedbox:seedbox /app/sab
+                ln -s /app/configs/sab /app/seedbox/sab
+                chown -R seedbox:seedbox /app/seedbox/sab
+				/app/startup/perm-fixes.sh
+        fi
 else
-	echo "Do not need to relink the sab config directory."
+        echo "Do not need to relink the sab config/seedbox directories."
 fi
 
 if [ -f /app/configs/sab/sabnzbd.ini ]
@@ -23,4 +32,4 @@ else
 	chown -R seedbox:seedbox /app/configs/sab/sabnzbd.ini
 fi
 
-su --login --command="TERM=xterm /usr/bin/sabnzbdplus -f /app/seedbox -s 0.0.0.0:31338" seedbox
+su --login --command="TERM=xterm /usr/bin/sabnzbdplus -f /app/seedbox/sab -s 0.0.0.0:31338" seedbox
