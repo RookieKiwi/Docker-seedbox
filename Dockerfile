@@ -6,7 +6,7 @@ ARG VERSION
 ARG DEBIAN_FRONTEND="noninteractive"
 LABEL build_version="Docker-seedbox version ${VERSION} by RookieKiwi"
 LABEL maintainer="RookieKiwi"
-ENV HOME="/config" PYTHONIOENCODING=utf-8
+ENV HOME="/config" PYTHONIOENCODING=utf-8 PYTHONUNBUFFERED=1
 
 # copy common files for install
 COPY common/ /app/installer-common/
@@ -22,7 +22,7 @@ RUN \
     apt-key adv --keyserver hkp://keyserver.ubuntu.com:11371 --recv-keys 0x98703123E0F52B2BE16D586EF13930B14BB9F05F && \
     echo "deb http://ppa.launchpad.net/jcfp/nobetas/ubuntu xenial main" | tee /etc/apt/sources.list.d/sabnzbd.list && \
     echo "deb http://ppa.launchpad.net/jcfp/sab-addons/ubuntu xenial main" | tee /etc/apt/sources.list.d/sabnzbd.list && \
-    apt-get update && apt-get install -y git wget unzip unrar libssl1.0
+    apt-get update && apt-get install -y git wget unzip unrar libssl1.0 p7zip
  
 RUN \
     echo "*** Installing PIP / Python and Cloudscraper ***" && \
@@ -87,12 +87,12 @@ RUN \
 
 RUN \
     echo "*** Install SABNZBDPLUS ***" && \
-    /usr/bin/python -m pip install apprise chardet pynzb requests sabyenc cryptography markdown --upgrade && \
-    /usr/bin/python3 -m pip install apprise chardet pynzb requests sabyenc cryptography markdown --upgrade && \
-    apt-get install -y sabnzbdplus python-cryptography par2-tbb
+    /usr/bin/python -m pip install sabyenc cryptography --upgrade && \
+    apt-get install -y sabnzbdplus python-cryptography par2-tbb    
 
 RUN \
     echo "*** Time to run a final clean up ***" && \
+    apt-get purge --auto-remove -y python-pip python3-pip && \
     apt-get clean -y && \
     rm -rf \
         /app/installer-common \
