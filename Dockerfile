@@ -27,8 +27,8 @@ RUN \
 RUN \
     echo "*** Installing PIP / Python and Cloudscraper ***" && \
     apt-get install -y libarchive-zip-perl libjson-perl libxml-libxml-perl python3-pip python-pip && \
-    pip3 install --upgrade pip &&\
-    pip install --upgrade pip &&\
+    /usr/bin/python3 -m pip install --upgrade pip &&\
+    /usr/bin/python -m pip install --upgrade pip &&\
     pip3 install cloudscraper &&\
     pip install cloudscraper
 
@@ -87,8 +87,8 @@ RUN \
 
 RUN \
     echo "*** Install SABNZBDPLUS ***" && \
-    /usr/bin/python -m pip install apprise chardet pynzb requests sabyenc cryptography --upgrade && \
-    /usr/bin/python3 -m pip install apprise chardet pynzb requests sabyenc cryptography --upgrade && \
+    /usr/bin/python -m pip install apprise chardet pynzb requests sabyenc cryptography markdown --upgrade && \
+    /usr/bin/python3 -m pip install apprise chardet pynzb requests sabyenc cryptography markdown --upgrade && \
     apt-get install -y sabnzbdplus python-cryptography par2-tbb
 
 RUN \
