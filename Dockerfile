@@ -6,6 +6,7 @@ ARG VERSION
 ARG DEBIAN_FRONTEND="noninteractive"
 LABEL build_version="Docker-seedbox version ${VERSION} by RookieKiwi"
 LABEL maintainer="RookieKiwi"
+PYTHONIOENCODING=utf-8
 
 # copy common files for install
 COPY common/ /app/installer-common/
@@ -20,6 +21,7 @@ RUN \
     echo "deb https://apt.sonarr.tv/ubuntu xenial main" | tee /etc/apt/sources.list.d/sonarr.list && \
     apt-key adv --keyserver hkp://keyserver.ubuntu.com:11371 --recv-keys 0x98703123E0F52B2BE16D586EF13930B14BB9F05F && \
     echo "deb http://ppa.launchpad.net/jcfp/nobetas/ubuntu xenial main" | tee /etc/apt/sources.list.d/sabnzbd.list && \
+    echo "deb http://ppa.launchpad.net/jcfp/sab-addons/ubuntu xenial main" | tee /etc/apt/sources.list.d/sabnzbd.list && \
     apt-get update && apt-get install -y git wget unzip unrar libssl1.0
  
 RUN \
@@ -85,20 +87,9 @@ RUN \
 
 RUN \
     echo "*** Install SABNZBDPLUS ***" && \
-    /usr/bin/python -m pip install sabyenc --upgrade && \
-    apt-get install -y sabnzbdplus python-cryptography && \
-    /usr/bin/python -m pip install cryptography --upgrade && \
-    apt-get install -y debhelper dh-autoreconf libwww-perl libtbb-dev devscripts && \
-    cd /tmp & mkdir par2tbb & cd par2tbb && \
-    git clone https://github.com/jcfp/debpkg-par2tbb.git && \
-    cd debpkg-par2tbb && \
-    uscan --force-download && \
-    dpkg-buildpackage -S -us -uc -d && \
-    dpkg-source -x ../par2cmdline-tbb_*.dsc && \
-    cd par2cmd* && \
-    ./configure --prefix=/usr --includedir=${prefix}/include --mandir=${prefix}/share/man --infodir=${prefix}/share/info --sysconfdir=/etc --localstatedir=/var --disable-silent-rules --libexecdir=${prefix}/lib/x86_64-linux-gnu --libdir=${prefix}/lib/x86_64-linux-gnu && \
-    make install
-
+    /usr/bin/python -m pip install apprise chardet pynzb requests sabyenc cryptography --upgrade && \
+    /usr/bin/python3 -m pip install apprise chardet pynzb requests sabyenc cryptography --upgrade && \
+    apt-get install -y sabnzbdplus python-cryptography par2-tbb
 
 RUN \
     echo "*** Time to run a final clean up ***" && \
