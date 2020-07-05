@@ -7,17 +7,19 @@ then
         then
                 echo "/app/configs/sab does not exist. Creating it."
                 mkdir -p /app/configs/sab
+                ln -s /app/downloads /app/seedbox/sab/Downloads
                 ln -s /app/configs/sab /app/seedbox/sab
                 chown -R seedbox:seedbox /app/configs/sab
                 chown -R seedbox:seedbox /app/seedbox/sab
-				/app/startup/perm-fixes.sh
+		/app/startup/perm-fixes.sh
         else
                 echo "/app/configs/sab exists, creating symlinks"
+                ln -s /app/downloads /app/seedbox/sab/Downloads
                 chown -R seedbox:seedbox /app/configs/sab
                 chown -R seedbox:seedbox /app/sab
                 ln -s /app/configs/sab /app/seedbox/sab
                 chown -R seedbox:seedbox /app/seedbox/sab
-				/app/startup/perm-fixes.sh
+		/app/startup/perm-fixes.sh
         fi
 else
         echo "Do not need to relink the sab config/seedbox directories."
@@ -28,7 +30,7 @@ then
 	echo "Found an existing sab configs. Will not reinitialize."
 else
 	echo "Need to set up a new sab install."
-    cp /app/startup/sabnzbd.ini /app/configs/sab/sabnzbd.ini
+        cp /app/startup/sabnzbd.ini /app/configs/sab/sabnzbd.ini
 	chown -R seedbox:seedbox /app/configs/sab/sabnzbd.ini
 fi
 

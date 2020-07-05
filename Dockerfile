@@ -24,9 +24,11 @@ RUN \
  
 RUN \
     echo "*** Installing PIP / Python and Cloudscraper ***" && \
-    apt-get install -y libarchive-zip-perl libjson-perl libxml-libxml-perl python3-pip && \
+    apt-get install -y libarchive-zip-perl libjson-perl libxml-libxml-perl python3-pip python-pip && \
     pip3 install --upgrade pip &&\
-    pip3 install cloudscraper
+    pip install --upgrade pip &&\
+    pip3 install cloudscraper &&\
+    pip install cloudscraper
 
 RUN \
     echo "*** Installing PHP, Web Services and creating seedbox user ***" && \
@@ -83,8 +85,20 @@ RUN \
 
 RUN \
     echo "*** Install SABNZBDPLUS ***" && \
-    pip install sabyenc --upgrade && \
-    apt-get install -y sabnzbdplus
+    /usr/bin/python -m pip install sabyenc --upgrade && \
+    apt-get install -y sabnzbdplus python-cryptography && \
+    /usr/bin/python -m pip install cryptography --upgrade && \
+    apt-get install -y debhelper dh-autoreconf libwww-perl libtbb-dev devscripts && \
+    cd /tmp & mkdir par2tbb & cd par2tbb && \
+    git clone https://github.com/jcfp/debpkg-par2tbb.git && \
+    cd debpkg-par2tbb && \
+    uscan --force-download && \
+    dpkg-buildpackage -S -us -uc -d && \
+    dpkg-source -x ../par2cmdline-tbb_*.dsc && \
+    cd par2cmd* && \
+    ./configure --prefix=/usr --includedir=${prefix}/include --mandir=${prefix}/share/man --infodir=${prefix}/share/info --sysconfdir=/etc --localstatedir=/var --disable-silent-rules --libexecdir=${prefix}/lib/x86_64-linux-gnu --libdir=${prefix}/lib/x86_64-linux-gnu && \
+    make install
+
 
 RUN \
     echo "*** Time to run a final clean up ***" && \
