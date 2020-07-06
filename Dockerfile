@@ -87,12 +87,13 @@ RUN \
 
 RUN \
     echo "*** Install SABNZBDPLUS ***" && \
-    rm -rf /usr/lib/python2.7/dist-packages/OpenSSL* && \
-    /usr/bin/python -m pip install setuptools --upgrade && \
     /usr/bin/python3 -m pip install setuptools --upgrade && \
-    /usr/bin/python -m pip install apprise chardet pynzb requests sabyenc cryptography markdown wheel cheetah feedparser cherrypy portend gntp pyopenssl --upgrade && \
     /usr/bin/python3 -m pip install apprise chardet pynzb requests sabyenc cryptography markdown wheel feedparser cherrypy portend gntp pyopenssl --upgrade && \
-    apt-get install -y sabnzbdplus python-cryptography par2-tbb
+    apt-get install -y libffi-dev libssl-dev python-cryptography par2-tbb && \
+    cd /app && \
+    git clone https://github.com/sabnzbd/sabnzbd.git && \
+    cd sabnzbd && \
+    python3 -m pip install -r requirements.txt -U
 
 RUN \
     echo "*** Time to run a final clean up ***" && \
