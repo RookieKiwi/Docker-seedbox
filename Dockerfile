@@ -6,7 +6,7 @@ ARG VERSION
 ARG DEBIAN_FRONTEND="noninteractive"
 LABEL build_version="Docker-seedbox version ${VERSION} by RookieKiwi"
 LABEL maintainer="RookieKiwi"
-ENV HOME="/config" PYTHONIOENCODING=utf-8 PYTHONUNBUFFERED=1 LANG=en_US.UTF-8
+ENV HOME="/config" PYTHONIOENCODING=utf-8 PYTHONUNBUFFERED=1
 
 # copy common files for install
 COPY common/ /app/installer-common/
