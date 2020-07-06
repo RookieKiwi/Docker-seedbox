@@ -6,7 +6,7 @@ ARG VERSION
 ARG DEBIAN_FRONTEND="noninteractive"
 LABEL build_version="Docker-seedbox version ${VERSION} by RookieKiwi"
 LABEL maintainer="RookieKiwi"
-ENV HOME="/config" PYTHONIOENCODING=utf-8 PYTHONUNBUFFERED=1
+ENV HOME="/config" PYTHONIOENCODING=utf-8 PYTHONUNBUFFERED=1 LANG=en_US.UTF-8
 
 # copy common files for install
 COPY common/ /app/installer-common/
@@ -89,11 +89,12 @@ RUN \
     echo "*** Install SABNZBDPLUS ***" && \
     /usr/bin/python3 -m pip install setuptools --upgrade && \
     /usr/bin/python3 -m pip install apprise chardet pynzb requests sabyenc cryptography markdown wheel feedparser cherrypy portend gntp pyopenssl --upgrade && \
-    apt-get install -y libffi-dev libssl-dev python-cryptography par2-tbb p7zip-full && \
+    apt-get install -y libffi-dev libssl-dev python-cryptography par2-tbb p7zip-full language-pack-en && \
     cd /app && \
     git clone https://github.com/sabnzbd/sabnzbd.git && \
     chown -R seedbox:seedbox sabnzbd && \
     cd sabnzbd && \
+    update-locale LANG=en_US.UTF-8 LANGUAGE && \
     python3 -m pip install -r requirements.txt -U
 
 RUN \
