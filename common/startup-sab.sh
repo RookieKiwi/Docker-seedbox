@@ -34,4 +34,4 @@ else
 	chown -R seedbox:seedbox /app/configs/sab/sabnzbd.ini
 fi
 
-su --login --command="TERM=xterm /usr/bin/sabnzbdplus -f /app/seedbox/sab -s 0.0.0.0:31338" seedbox
+su --login --command="TERM=xterm /usr/bin/python3 /app/sabnzbd/SABnzbd.py -f /app/seedbox/sab -s 0.0.0.0:31338" seedbox
