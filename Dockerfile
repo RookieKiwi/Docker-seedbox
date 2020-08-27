@@ -57,14 +57,14 @@ RUN \
 
 RUN \
     echo "**** Install Jackett ****" && \
-    mkdir /app/jackett && cd /tmp && wget https://github.com/Jackett/Jackett/releases/download/v0.16.788/Jackett.Binaries.LinuxAMDx64.tar.gz -O /tmp/jackett.tgz && \
+    mkdir /app/jackett && cd /tmp && wget https://github.com/Jackett/Jackett/releases/download/v0.16.1038/Jackett.Binaries.LinuxAMDx64.tar.gz -O /tmp/jackett.tgz && \
     tar xf /tmp/jackett.tgz -C /app/jackett --strip-components=1 && \
     chown -R seedbox:seedbox /app/jackett
 
  RUN \
     echo "*** Install Radarr ***" && \
     cd /tmp && apt-get install mono-devel -y && \
-    wget https://github.com/Radarr/Radarr/releases/download/v0.2.0.1480/Radarr.develop.0.2.0.1480.linux.tar.gz -O radarr.tgz && \
+    wget https://github.com/Radarr/Radarr/releases/download/v0.2.0.1504/Radarr.develop.0.2.0.1504.linux.tar.gz -O radarr.tgz && \
     tar -xvzf radarr.tgz && \
     mv Radarr /app/radarr && \
     chown -R seedbox:seedbox /app/radarr
