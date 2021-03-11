@@ -57,21 +57,21 @@ RUN \
 
 RUN \
     echo "**** Install Jackett ****" && \
-    mkdir /app/jackett && cd /tmp && wget https://github.com/Jackett/Jackett/releases/download/v0.16.1038/Jackett.Binaries.LinuxAMDx64.tar.gz -O /tmp/jackett.tgz && \
+    mkdir /app/jackett && cd /tmp && wget https://github.com/Jackett/Jackett/releases/download/v0.17.671/Jackett.Binaries.LinuxAMDx64.tar.gz -O /tmp/jackett.tgz && \
     tar xf /tmp/jackett.tgz -C /app/jackett --strip-components=1 && \
     chown -R seedbox:seedbox /app/jackett
 
  RUN \
     echo "*** Install Radarr ***" && \
     cd /tmp && apt-get install mono-devel -y && \
-    wget https://github.com/Radarr/Radarr/releases/download/v0.2.0.1504/Radarr.develop.0.2.0.1504.linux.tar.gz -O radarr.tgz && \
+    wget https://github.com/Radarr/Radarr/releases/download/v3.0.2.4552/Radarr.master.3.0.2.4552.linux.tar.gz -O radarr.tgz && \
     tar -xvzf radarr.tgz && \
     mv Radarr /app/radarr && \
     chown -R seedbox:seedbox /app/radarr
 
 RUN \
     echo "*** Install Lidarr ***" && \
-    cd /tmp && wget https://github.com/lidarr/Lidarr/releases/download/v0.7.1.1381/Lidarr.master.0.7.1.1381.linux.tar.gz -O lidarr.tgz && \
+    cd /tmp && wget https://github.com/lidarr/Lidarr/releases/download/v0.8.0.2042/Lidarr.develop.0.8.0.2042.linux.tar.gz -O lidarr.tgz && \
     tar xzvf lidarr.tgz && \
     mv Lidarr /app/lidarr && \
     chown -R seedbox:seedbox /app/lidarr
