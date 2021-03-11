@@ -28,7 +28,7 @@ RUN \
     echo "*** Installing PIP / Python and Cloudscraper ***" && \
     apt-get install -y libarchive-zip-perl libjson-perl libxml-libxml-perl python3-pip python-pip && \
     /usr/bin/python3 -m pip install --upgrade pip &&\
-    /usr/bin/python -m pip install --upgrade pip &&\
+#   /usr/bin/python -m pip install --upgrade pip &&\
     pip3 install cloudscraper &&\
     pip install cloudscraper
 
