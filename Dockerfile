@@ -86,7 +86,7 @@ RUN \
  RUN \
     echo "*** Install Bazarr ***" && \
     cd /app && git clone https://github.com/morpheus65535/bazarr.git && \
-    cd bazarr && pip3 install -r requirements.txt && \
+    cd bazarr && pip3 install -r requirements.txt
 
 RUN \
     echo "*** Install SABNZBDPLUS ***" && \
