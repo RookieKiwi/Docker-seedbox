@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu:16.04
 USER root
 
 # version labels
@@ -22,16 +22,17 @@ RUN \
     apt-key adv --keyserver hkp://keyserver.ubuntu.com:11371 --recv-keys 0x98703123E0F52B2BE16D586EF13930B14BB9F05F && \
     echo "deb http://ppa.launchpad.net/jcfp/nobetas/ubuntu xenial main" | tee /etc/apt/sources.list.d/sabnzbd.list && \
     echo "deb http://ppa.launchpad.net/jcfp/sab-addons/ubuntu xenial main" | tee /etc/apt/sources.list.d/sabnzbd.list && \
-    apt-get update && apt-get install -y git wget unzip unrar libssl1.0 p7zip
+    apt-get update && apt-get install -y git wget unzip unrar libssl1.0 p7zip software-properties-common python-software-properties && \
+    add-apt-repository ppa:deadsnakes/ppa && apt-get update
  
 RUN \
     echo "*** Installing PIP / Python and Cloudscraper ***" && \
-    apt-get install -y libarchive-zip-perl libjson-perl libxml-libxml-perl python3-pip python-pip curl && \
-    #/usr/bin/python3 -m pip install --user --upgrade pip &&\
-    #/usr/bin/python -m pip install --user --upgrade pip &&\
-    curl https://bootstrap.pypa.io/pip/3.5/get-pip.py -o get-pip.py &&\
-    /usr/bin/python3 get-pip.py --force-reinstall &&\
-    pip install --user --upgrade pip &&\
+    apt-get install -y libarchive-zip-perl libjson-perl libxml-libxml-perl python3.6 python3.6-dev python3.6-venv python3-pip python-pip curl && \
+    /usr/bin/python3.6 -m pip install --upgrade pip &&\
+    /usr/bin/python -m pip install --upgrade pip &&\
+    #curl https://bootstrap.pypa.io/pip/3.5/get-pip.py -o get-pip.py &&\
+    #/usr/bin/python3 get-pip.py --force-reinstall &&\
+    #pip install --user --upgrade pip &&\
     pip3 install cloudscraper &&\
     pip install cloudscraper
 
@@ -66,7 +67,7 @@ RUN \
 
  RUN \
     echo "*** Install Radarr ***" && \
-    cd /tmp && apt-get install mono-devel libmono-system-drawing4.0-cil libmono-system-runtime4.0-cil libmono-system-servicemodel4.0a-cil libmono-system-web-services4.0-cil libmono-cil-dev msbuild -y && \
+    cd /tmp && apt-get install mono-devel -y && \
     wget https://github.com/Radarr/Radarr/releases/download/v3.0.2.4552/Radarr.master.3.0.2.4552.linux.tar.gz -O radarr.tgz && \
     tar -xvzf radarr.tgz && \
     mv Radarr /app/radarr && \
