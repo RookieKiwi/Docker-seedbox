@@ -112,5 +112,4 @@ RUN \
 EXPOSE 31337 31338 31339 31340 31341 31342 31343 31344 31345 31346
 VOLUME /app/downloads /app/configs
 
-
-CMD ["/usr/bin/supervisord -c /etc/supervisor/supervisord.conf"]
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf"]
