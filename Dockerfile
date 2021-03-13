@@ -66,7 +66,7 @@ RUN \
 
  RUN \
     echo "*** Install Radarr ***" && \
-    cd /tmp && apt-get install mono-devel -y && \
+    cd /tmp && apt-get install mono-devel libmono-system-drawing4.0-cil libmono-system-runtime4.0-cil libmono-system-servicemodel4.0a-cil libmono-system-web-services4.0-cil libmono-cil-dev msbuild -y && \
     wget https://github.com/Radarr/Radarr/releases/download/v3.0.2.4552/Radarr.master.3.0.2.4552.linux.tar.gz -O radarr.tgz && \
     tar -xvzf radarr.tgz && \
     mv Radarr /app/radarr && \
