@@ -53,7 +53,7 @@
           "id"    => '/usr/bin/id',       // Something like /usr/bin/id. If empty, will be found in PATH.
           "stat"  => '/usr/bin/stat',     // Something like /usr/bin/stat. If empty, will be found in PATH.
           "pgrep" => '/usr/bin/pgrep',
-          "python"=> '/usr/bin/python3',
+          "python"=> '/usr/bin/python3.6',
 	);
 
 	$localhosts = array( 			// list of local interfaces

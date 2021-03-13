@@ -22,14 +22,16 @@ RUN \
     apt-key adv --keyserver hkp://keyserver.ubuntu.com:11371 --recv-keys 0x98703123E0F52B2BE16D586EF13930B14BB9F05F && \
     echo "deb http://ppa.launchpad.net/jcfp/nobetas/ubuntu xenial main" | tee /etc/apt/sources.list.d/sabnzbd.list && \
     echo "deb http://ppa.launchpad.net/jcfp/sab-addons/ubuntu xenial main" | tee /etc/apt/sources.list.d/sabnzbd.list && \
-    apt-get update && apt-get install -y git wget unzip unrar libssl1.0 p7zip software-properties-common python-software-properties && \
-    add-apt-repository ppa:deadsnakes/ppa && apt-get update
+    apt-get update && apt-get install -y git wget unzip libssl1.0 p7zip software-properties-common python-software-properties && \
+    add-apt-repository ppa:deadsnakes/ppa && apt-get update && \
+    cd /tmp && wget https://www.rarlab.com/rar/rarlinux-x64-6.0.0.tar.gz && tar xzvf rarlinux-x64-6.0.0.tar.gz && cp rar/rar /usr/bin && cp rar/unrar /usr/bin && rm -rf rar*
  
 RUN \
     echo "*** Installing PIP / Python and Cloudscraper ***" && \
     apt-get install -y libarchive-zip-perl libjson-perl libxml-libxml-perl python3.6 python3.6-dev python3.6-venv python3-pip python-pip curl && \
     curl https://bootstrap.pypa.io/pip/3.5/get-pip.py -o get-pip.py &&\
     /usr/bin/python3.6 get-pip.py --force-reinstall &&\
+    rm get-pip.py &&\
     pip install --user --upgrade pip &&\
     pip3 install cloudscraper &&\
     pip install cloudscraper
@@ -60,14 +62,14 @@ RUN \
 
 RUN \
     echo "**** Install Jackett ****" && \
-    mkdir /app/jackett && cd /tmp && wget https://github.com/Jackett/Jackett/releases/download/v0.17.671/Jackett.Binaries.LinuxAMDx64.tar.gz -O /tmp/jackett.tgz && \
+    mkdir /app/jackett && cd /tmp && wget https://github.com/Jackett/Jackett/releases/download/v0.17.677/Jackett.Binaries.LinuxAMDx64.tar.gz -O /tmp/jackett.tgz && \
     tar xf /tmp/jackett.tgz -C /app/jackett --strip-components=1 && \
     chown -R seedbox:seedbox /app/jackett
 
  RUN \
     echo "*** Install Radarr ***" && \
     cd /tmp && apt-get install mono-devel -y && \
-    wget https://github.com/Radarr/Radarr/releases/download/v3.0.2.4552/Radarr.master.3.0.2.4552.linux.tar.gz -O radarr.tgz && \
+    wget https://github.com/Radarr/Radarr/releases/download/v3.0.2.4552/Radarr.master.3.0.2.4552.linux-core-x64.tar.gz -O radarr.tgz && \
     tar -xvzf radarr.tgz && \
     mv Radarr /app/radarr && \
     chown -R seedbox:seedbox /app/radarr
@@ -82,11 +84,6 @@ RUN \
 RUN \
     echo "*** Install Sonarr ***" && \
     apt-get install sonarr sqlite3 libmediainfo-dev -y
-    
- RUN \
-    echo "*** Install Bazarr ***" && \
-    cd /app && git clone https://github.com/morpheus65535/bazarr.git && \
-    cd bazarr && pip3 install -r requirements.txt
 
 RUN \
     echo "*** Install SABNZBDPLUS ***" && \

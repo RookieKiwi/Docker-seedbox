@@ -32,4 +32,4 @@ else
         chown -R seedbox:seedbox /app/configs/radarr/config.xml
 fi
 
-su --login --command="TERM=xterm /usr/bin/mono /app/radarr/Radarr.exe -nobrowser -data=/app/seedbox/radarr" seedbox
+su --login --command="TERM=xterm /app/radarr/Radarr -nobrowser -data=/app/seedbox/radarr" seedbox
