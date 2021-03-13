@@ -28,11 +28,11 @@ RUN \
 RUN \
     echo "*** Installing PIP / Python and Cloudscraper ***" && \
     apt-get install -y libarchive-zip-perl libjson-perl libxml-libxml-perl python3.6 python3.6-dev python3.6-venv python3-pip python-pip curl && \
-    /usr/bin/python3.6 -m pip install --upgrade pip &&\
-    /usr/bin/python -m pip install --upgrade pip &&\
-    #curl https://bootstrap.pypa.io/pip/3.5/get-pip.py -o get-pip.py &&\
-    #/usr/bin/python3 get-pip.py --force-reinstall &&\
-    #pip install --user --upgrade pip &&\
+    #/usr/bin/python3.6 -m pip install --upgrade pip &&\
+    #/usr/bin/python -m pip install --upgrade pip &&\
+    curl https://bootstrap.pypa.io/pip/3.5/get-pip.py -o get-pip.py &&\
+    /usr/bin/python3 get-pip.py --force-reinstall &&\
+    pip install --user --upgrade pip &&\
     pip3 install cloudscraper &&\
     pip install cloudscraper
 
