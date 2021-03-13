@@ -29,8 +29,8 @@ RUN \
     apt-get install -y libarchive-zip-perl libjson-perl libxml-libxml-perl python3-pip python-pip && \
     #/usr/bin/python3 -m pip install --user --upgrade pip &&\
     #/usr/bin/python -m pip install --user --upgrade pip &&\
-    curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
-    /usr/bin/python3 get-pip.py --force-reinstall
+    curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py &&\
+    /usr/bin/python3 get-pip.py --force-reinstall &&\
     pip install --user --upgrade pip &&\
     pip3 install cloudscraper &&\
     pip install cloudscraper
