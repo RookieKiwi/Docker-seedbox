@@ -52,7 +52,8 @@ RUN \
     echo "*** Software installed, configuring applications and setting up directories ***" && \
     cd / && \
     cp /app/installer-common/config.php /app/installer-common/startup-rtorrent.sh /app/installer-common/startup-*.sh /app/installer-common/*config.xml /app/installer-common/sab*.ini /app/installer-common/rtorrent.rc /app/installer-common/perm-fixes.sh /app/startup/ && \
-    cp /app/installer-common/supervisord.conf /etc/supervisor/conf.d/ && \
+    cp /app/installer-common/seedbox.conf /etc/supervisor/conf.d/ && \
+    cp /app/installer-common/supervisord.conf /etc/supervisor/ && \
     chmod +x /app/startup/*.sh && \
     ln -s /config /app/configs && \
     sed -i 's/\/var\/log/\/app\/configs\/logs/g' /etc/nginx/nginx.conf
