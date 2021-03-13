@@ -32,4 +32,4 @@ else
         chown -R seedbox:seedbox /app/configs/lidarr/config.xml
 fi
 
-su --login --command="TERM=xterm /usr/bin/mono /app/lidarr/Lidarr.exe -nobrowser -data=/app/seedbox/lidarr" seedbox
+su --login --command="TERM=xterm /app/lidarr/Lidarr -nobrowser -data=/app/seedbox/lidarr" seedbox

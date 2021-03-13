@@ -76,7 +76,8 @@ RUN \
 
 RUN \
     echo "*** Install Lidarr ***" && \
-    cd /tmp && wget https://github.com/lidarr/Lidarr/releases/download/v0.8.0.2042/Lidarr.develop.0.8.0.2042.linux.tar.gz -O lidarr.tgz && \
+    cd /tmp && wget https://github.com/acoustid/chromaprint/releases/download/v1.5.0/chromaprint-fpcalc-1.5.0-linux-x86_64.tar.gz -O fpcalc.tgz && tar xzvf fpcalc.tgz && cp chromaprint-fpcalc-1.5.0-linux-x86_64/fpcalc /usr/bin && \
+    cd /tmp && wget https://github.com/lidarr/Lidarr/releases/download/v0.8.0.2042/Lidarr.develop.0.8.0.2042.linux-core-x64.tar.gz -O lidarr.tgz && \
     tar xzvf lidarr.tgz && \
     mv Lidarr /app/lidarr && \
     chown -R seedbox:seedbox /app/lidarr
@@ -112,4 +113,4 @@ EXPOSE 31337 31338 31339 31340 31341 31342 31343 31344 31345 31346
 VOLUME /app/downloads /app/configs
 
 
-CMD ["supervisord"]
+CMD ["supervisord -c /etc/supervisor/supervisord.conf"]
