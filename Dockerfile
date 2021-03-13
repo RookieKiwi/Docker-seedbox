@@ -28,10 +28,8 @@ RUN \
 RUN \
     echo "*** Installing PIP / Python and Cloudscraper ***" && \
     apt-get install -y libarchive-zip-perl libjson-perl libxml-libxml-perl python3.6 python3.6-dev python3.6-venv python3-pip python-pip curl && \
-    #/usr/bin/python3.6 -m pip install --upgrade pip &&\
-    #/usr/bin/python -m pip install --upgrade pip &&\
     curl https://bootstrap.pypa.io/pip/3.5/get-pip.py -o get-pip.py &&\
-    /usr/bin/python3 get-pip.py --force-reinstall &&\
+    /usr/bin/python3.6 get-pip.py --force-reinstall &&\
     pip install --user --upgrade pip &&\
     pip3 install cloudscraper &&\
     pip install cloudscraper
@@ -84,22 +82,22 @@ RUN \
     echo "*** Install Sonarr ***" && \
     apt-get install sonarr sqlite3 libmediainfo-dev -y
     
-# RUN \
-#    echo "*** Install Bazarr ***" && \
-#    cd /app && git clone https://github.com/morpheus65535/bazarr.git && \
-#    cd bazarr && pip install -r requirements.txt && \
+ RUN \
+    echo "*** Install Bazarr ***" && \
+    cd /app && git clone https://github.com/morpheus65535/bazarr.git && \
+    cd bazarr && pip3 install -r requirements.txt && \
 
 RUN \
     echo "*** Install SABNZBDPLUS ***" && \
-    /usr/bin/python3 -m pip install setuptools --upgrade && \
-    /usr/bin/python3 -m pip install apprise chardet pynzb requests sabyenc cryptography markdown wheel feedparser cherrypy portend gntp pyopenssl --upgrade && \
+    /usr/bin/python3.6 -m pip install setuptools --upgrade && \
+    /usr/bin/python3.6 -m pip install apprise chardet pynzb requests sabyenc cryptography markdown wheel feedparser cherrypy portend gntp pyopenssl --upgrade && \
     apt-get install -y libffi-dev libssl-dev python-cryptography par2-tbb p7zip-full language-pack-en && \
     cd /app && \
     git clone https://github.com/sabnzbd/sabnzbd.git && \
     chown -R seedbox:seedbox sabnzbd && \
     cd sabnzbd && \
     update-locale LANG=en_US.UTF-8 LANGUAGE && \
-    python3 -m pip install -r requirements.txt -U
+    python3.6 -m pip install -r requirements.txt -U
 
 RUN \
     echo "*** Time to run a final clean up ***" && \
