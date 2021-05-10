@@ -69,7 +69,7 @@ RUN \
  RUN \
     echo "*** Install Radarr ***" && \
     cd /tmp && apt-get install mono-devel -y && \
-    wget https://github.com/Radarr/Radarr/releases/download/v3.0.2.4552/Radarr.master.3.0.2.4552.linux-core-x64.tar.gz -O radarr.tgz && \
+    wget https://github.com/Radarr/Radarr/releases/download/v3.1.1.4954/Radarr.master.3.1.1.4954.linux-core-x64.tar.gz -O radarr.tgz && \
     tar -xvzf radarr.tgz && \
     mv Radarr /app/radarr && \
     chown -R seedbox:seedbox /app/radarr
@@ -77,7 +77,7 @@ RUN \
 RUN \
     echo "*** Install Lidarr ***" && \
     cd /tmp && wget https://github.com/acoustid/chromaprint/releases/download/v1.5.0/chromaprint-fpcalc-1.5.0-linux-x86_64.tar.gz -O fpcalc.tgz && tar xzvf fpcalc.tgz && cp chromaprint-fpcalc-1.5.0-linux-x86_64/fpcalc /usr/bin && \
-    cd /tmp && wget https://github.com/lidarr/Lidarr/releases/download/v0.8.0.2042/Lidarr.develop.0.8.0.2042.linux-core-x64.tar.gz -O lidarr.tgz && \
+    cd /tmp && wget https://github.com/lidarr/Lidarr/releases/download/v0.8.1.2135/Lidarr.master.0.8.1.2135.linux-core-x64.tar.gz -O lidarr.tgz && \
     tar xzvf lidarr.tgz && \
     mv Lidarr /app/lidarr && \
     chown -R seedbox:seedbox /app/lidarr
